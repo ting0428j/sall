@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>擴大性溝通打字機</title>
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffeef5;--bg2:#ffd3e6;--card:#fffafc;--ink:#5a2a44;--sub:#9a6b84;--pri:#ff8fb8;--pri2:#f06aa0;--acc:#d9b3ff;--line:#ffc2dc;--warn:#fff0c2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1830;--bg2:#3d2046;--card:#3a2446;--ink:#ffeaf4;--sub:#e0b4cc;--pri:#ff8fb8;--pri2:#ff6fa6;--acc:#b58cf0;--line:#6a3d7a;--warn:#4a4222}}
+:root[data-theme="dark"]{--bg:#2a1830;--bg2:#3d2046;--card:#3a2446;--ink:#ffeaf4;--sub:#e0b4cc;--pri:#ff8fb8;--pri2:#ff6fa6;--acc:#b58cf0;--line:#6a3d7a;--warn:#4a4222}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;line-height:1.5}
+main{max-width:900px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:8px 0 12px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:14px;margin-bottom:14px}
+#hint{background:var(--warn);border-radius:14px;padding:10px 14px;margin-bottom:12px;display:none}
+#zy{min-height:4.5rem;font-size:3rem;text-align:center;letter-spacing:.15em;color:var(--pri2);font-weight:700}
+textarea{width:100%;min-height:260px;font:inherit;font-size:2rem;line-height:1.7;border:2px solid var(--line);border-radius:16px;padding:12px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea:focus{outline:3px solid var(--acc);border-color:var(--acc)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+button{font:inherit;font-size:1.15rem;font-weight:700;border:0;border-radius:14px;padding:12px 18px;background:var(--pri);color:#3b1020;cursor:pointer}
+button:hover{background:var(--pri2)}
+button.s{background:var(--acc);color:#10222e}
+button.g{background:transparent;border:2px solid var(--line);color:var(--ink)}
+details summary{cursor:pointer;font-weight:700}
+label{display:flex;gap:10px;align-items:center;margin:10px 0;flex-wrap:wrap}
+input[type=range]{flex:1;min-width:140px}
+select{font:inherit;padding:8px;border-radius:10px;background:var(--bg);color:var(--ink);border:2px solid var(--line);max-width:100%}
+small{color:var(--sub)}
+body{background:radial-gradient(circle at 20% 0,rgba(255,255,255,.8),transparent 40%),linear-gradient(170deg,var(--bg),var(--bg2));background-attachment:fixed;min-height:100vh}
+body::after{content:"🌸 ✨ 🎀 ✨ 🌸 ✨ 🎀 ✨ 🌸 ✨ 🎀 ✨ 🌸";position:fixed;left:0;right:0;bottom:0;text-align:center;font-size:1.5rem;opacity:.55;pointer-events:none;white-space:nowrap;overflow:hidden;padding-bottom:env(safe-area-inset-bottom,0px)}
+main{padding-bottom:3.5rem}
+.ban{text-align:center;margin:4px 0 16px}
+.crown{font-size:2.8rem;line-height:1;filter:drop-shadow(0 3px 0 rgba(240,106,160,.35))}
+h1{font-family:"ZCOOL KuaiLe","PingFang TC","Microsoft JhengHei",sans-serif;font-size:clamp(2rem,9vw,3.4rem);margin:4px 0;letter-spacing:.08em;background:linear-gradient(90deg,#ff7eb3,#c58bff,#ff7eb3);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 rgba(255,255,255,.7))}
+.sp{letter-spacing:.5em;opacity:.8}
+.card{border:3px solid var(--line);border-radius:30px;box-shadow:0 8px 0 rgba(255,143,184,.28),0 14px 24px rgba(240,106,160,.12)}
+#zy{text-shadow:0 3px 0 rgba(255,143,184,.3)}
+textarea{border:3px solid var(--line);border-radius:24px;padding:6px 16px;line-height:3.4rem;background:repeating-linear-gradient(var(--card),var(--card) calc(3.4rem - 2px),var(--line) calc(3.4rem - 2px),var(--line) 3.4rem);background-attachment:local}
+button{border-radius:999px;background:linear-gradient(180deg,#ff9fc7,#f06aa0);color:#fff;box-shadow:0 4px 0 #c94a82;text-shadow:0 1px 0 rgba(0,0,0,.15)}
+button:hover{background:linear-gradient(180deg,#ffb0d1,#f57aae)}
+button:active{transform:translateY(3px);box-shadow:0 1px 0 #c94a82}
+button.s{background:linear-gradient(180deg,#dcb9ff,#b588f0);box-shadow:0 4px 0 #8a5fcf}
+button.s:active{box-shadow:0 1px 0 #8a5fcf}
+button.g{background:var(--card);color:var(--pri2);text-shadow:none;border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+
+body::after{content:none}
+main{padding-bottom:1.5rem}
+textarea{background:var(--card);line-height:1.7}
+.gal{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:22px;padding:22px 14px}
+.fr{text-align:center;max-width:100%}
+.fr img{display:block;max-width:100%;height:auto;border-radius:26px;border:6px solid #fff;box-shadow:0 0 0 3px var(--pri),0 8px 0 rgba(255,143,184,.3)}
+.ph{width:300px}.sf{width:190px}
+.cap{margin-top:14px;font-family:"ZCOOL KuaiLe","PingFang TC","Microsoft JhengHei",sans-serif;font-size:1.5rem;color:var(--pri2)}
+
+.hero{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:clamp(8px,3vw,24px);padding:clamp(14px,3vw,24px);margin:4px 0 16px;border-radius:36px;border:3px solid var(--line);background:linear-gradient(135deg,var(--card),var(--bg2));box-shadow:0 8px 0 rgba(255,143,184,.28),0 14px 24px rgba(240,106,160,.12);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12% 20%,rgba(255,255,255,.7),transparent 30%),radial-gradient(circle at 90% 85%,rgba(217,179,255,.35),transparent 35%);pointer-events:none}
+.av{position:relative;z-index:1;margin-top:12px}
+.ring{width:clamp(76px,18vw,150px);aspect-ratio:1;border-radius:50%;overflow:hidden;border:5px solid #fff;box-shadow:0 0 0 3px var(--pri),0 6px 0 rgba(255,143,184,.35)}
+.ring img{width:100%;height:100%;object-fit:cover;display:block;border:0;border-radius:0;box-shadow:none}
+.av:first-child .ring img{transform:scale(1.8);transform-origin:50% 25%}
+.av.s .ring img{object-position:50% 50%}
+.cr{position:absolute;top:-.75em;left:50%;transform:translateX(-50%) rotate(-12deg);font-size:clamp(1.5rem,5vw,2.6rem);line-height:1;z-index:2;filter:drop-shadow(0 2px 0 rgba(240,106,160,.35))}
+.av.s .cr{transform:translateX(-50%);font-size:clamp(1.2rem,4vw,2rem);top:-.6em}
+.tt{position:relative;z-index:1;text-align:center;min-width:0}
+.tt h1{font-size:clamp(1.4rem,6vw,3.2rem);margin:4px 0;line-height:1.15}
+.tt .sp{font-size:clamp(.8rem,3vw,1.2rem);letter-spacing:.3em}
+.sub{font-size:clamp(.75rem,2.6vw,1.1rem);color:var(--sub)}
+.tl{display:inline-block}
+.ring svg{width:100%;height:100%;display:block}
+.av:first-child .cr{transform:translateX(-50%);font-size:clamp(1.2rem,4vw,2rem);top:-.6em}
+#tn{text-align:center;min-height:1.6rem;font-size:1.2rem;color:var(--sub);font-weight:700}
+</style>
+</head>
+<body>
+<main>
+<header class="hero"><div class="av"><span class="cr">✨</span><div class="ring"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="電腦"><rect width="100" height="100" fill="#fff0f6"/><rect x="16" y="20" width="68" height="46" rx="6" fill="#fff" stroke="#f06aa0" stroke-width="4"/><rect x="22" y="26" width="56" height="34" rx="3" fill="#ffe3ef"/><rect x="28" y="33" width="30" height="5" rx="2.5" fill="#f06aa0"/><rect x="28" y="43" width="42" height="5" rx="2.5" fill="#f06aa0"/><rect x="28" y="53" width="3" height="0.1" fill="#f06aa0"/><rect x="62" y="33" width="3" height="5" fill="#b588f0"/><rect x="44" y="66" width="12" height="9" fill="#b588f0"/><rect x="30" y="75" width="40" height="6" rx="3" fill="#b588f0"/></svg></div></div><div class="tt"><div class="sp">🌸 ✨ 🎀 ✨ 🌸</div><h1><span class="tl">擴大性溝通</span><wbr><span class="tl">打字機</span></h1><div class="sub">💗 想說的話，我來幫你念出來 💗</div></div><div class="av s"><span class="cr">✨</span><div class="ring"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="鍵盤"><rect width="100" height="100" fill="#f6efff"/><rect x="8" y="34" width="84" height="42" rx="8" fill="#fff" stroke="#b588f0" stroke-width="4"/><rect x="16.0" y="44" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="26.5" y="44" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="37.0" y="44" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="47.5" y="44" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="58.0" y="44" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="68.5" y="44" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="79.0" y="44" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="20.0" y="54" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="30.5" y="54" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="41.0" y="54" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="51.5" y="54" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="62.0" y="54" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="72.5" y="54" width="8" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/><rect x="28" y="64" width="44" height="7" rx="2" fill="#ffe3ef" stroke="#f06aa0" stroke-width="1.2"/></svg></div></div></header>
+<div id="hint">目前看起來是英文輸入。請把電腦的輸入法切換成「中文（繁體）注音」，才能打注音並自動變成中文字。</div>
+<div class="card"><div id="zy" aria-live="polite">　</div><div id="tn">　</div></div>
+<div class="card">
+<textarea id="t" placeholder="在這裡打字吧 🌸" autofocus></textarea>
+<div class="row">
+<button id="bs">🔊 念這一句</button>
+<button id="ba" class="s">📖 念全文</button>
+<button id="bx" class="g">⏹ 停止</button>
+<button id="bw" class="s">📄 下載 Word 檔</button>
+<button id="bc" class="g">🗑 清除</button>
+</div>
+</div>
+<div class="card">
+<details>
+<summary>⚙️ 聲音設定</summary>
+<label><input type="checkbox" id="k" checked> 打每個注音時念出聲音</label>
+<label><input type="checkbox" id="d" checked> 直接念注音符號本身（不用國字代替；是否念得出來依裝置而定；聲調音不受影響）</label>
+<label><input type="checkbox" id="n" checked> 按聲調（空白=一聲、6=二聲、3=三聲、4=四聲、7=輕聲）時念出整個音</label>
+<label><input type="checkbox" id="c" checked> 選好中文字後念出來</label>
+<label><input type="checkbox" id="e" checked> 打完一句（。！？或 Enter）自動念整句</label>
+<label>聲音 <select id="v"></select></label>
+<label>音調（越高越像小女孩）<input type="range" id="p" min="0.5" max="2" step="0.05" value="1.3"></label>
+<label>速度 <input type="range" id="r" min="0.5" max="1.5" step="0.05" value="0.85"></label>
+<div class="row"><button class="s" id="bt">試聽</button></div>
+<small>小提醒：實際的聲音由裝置提供。Windows 的 Edge 瀏覽器有「HsiaoChen」女聲，Mac / iPad 有「美佳」女聲，再配合調高音調，聽起來更像小女孩。</small>
+</details>
+</div>
+</main>
+<script>
+(function(){
+var MAP={Digit1:'ㄅ',KeyQ:'ㄆ',KeyA:'ㄇ',KeyZ:'ㄈ',Digit2:'ㄉ',KeyW:'ㄊ',KeyS:'ㄋ',KeyX:'ㄌ',KeyE:'ㄍ',KeyD:'ㄎ',KeyC:'ㄏ',KeyR:'ㄐ',KeyF:'ㄑ',KeyV:'ㄒ',Digit5:'ㄓ',KeyT:'ㄔ',KeyG:'ㄕ',KeyB:'ㄖ',KeyY:'ㄗ',KeyH:'ㄘ',KeyN:'ㄙ',KeyU:'ㄧ',KeyJ:'ㄨ',KeyM:'ㄩ',Digit8:'ㄚ',KeyI:'ㄛ',KeyK:'ㄜ',Comma:'ㄝ',Digit9:'ㄞ',KeyO:'ㄟ',KeyL:'ㄠ',Period:'ㄡ',Digit0:'ㄢ',KeyP:'ㄣ',Semicolon:'ㄤ',Slash:'ㄥ',Minus:'ㄦ'};
+/* 單一注音符號的「名稱音」：聲母用 ㄅㄛ、ㄉㄜ…這種課堂唸法，每個字都是不會唸錯的字 */
+var NAME={'ㄅ':'波','ㄆ':'坡','ㄇ':'摸','ㄈ':'佛','ㄉ':'的','ㄊ':'梯','ㄋ':'呢','ㄌ':'了','ㄍ':'哥','ㄎ':'科','ㄏ':'喝','ㄐ':'雞','ㄑ':'七','ㄒ':'吸','ㄓ':'知','ㄔ':'吃','ㄕ':'詩','ㄖ':'日','ㄗ':'資','ㄘ':'雌','ㄙ':'思','ㄧ':'衣','ㄨ':'烏','ㄩ':'迂','ㄚ':'阿','ㄛ':'喔','ㄜ':'鵝','ㄝ':'誒','ㄞ':'哀','ㄟ':'欸','ㄠ':'凹','ㄡ':'歐','ㄢ':'安','ㄣ':'恩','ㄤ':'骯','ㄥ':'鞥','ㄦ':'兒'};
+/* 完整音節（注音+聲調）→ 代表字。每個音節 5 個字，依序是 一聲、二聲、三聲、四聲、輕聲；「-」代表沒有這個聲調 */
+var SYL={"ㄧ":"伊圯偯弋-","ㄉㄧㄥ":"叮-頂定-","ㄑㄧ":"柒岐企迄-","ㄋㄞ":"-摨奶奈-","ㄐㄧㄡ":"啾-久臼-","ㄌㄜ":"肋--叻了","ㄦ":"-儿洱二-","ㄖㄣ":"-人荏刃-","ㄖㄨ":"-如汝入-","ㄅㄚ":"巴拔把爸吧","ㄐㄧ":"乩及戟忌-","ㄉㄠ":"刀捯島到-","ㄉㄧㄠ":"刁-扚吊-","ㄌㄧ":"哩狸李力-","ㄅㄧ":"逼荸妣必-","ㄕ":"尸十史士匙","ㄅㄛ":"玻帛跛檗卜","ㄧㄡ":"攸尤友又蒏","ㄙㄢ":"三-傘散-","ㄒㄧㄚ":"煆匣閜下-","ㄓㄤ":"張-掌丈-","ㄕㄤ":"商-晌上裳","ㄧㄚ":"丫芽啞訝呀","ㄨㄢ":"剜丸挽腕-","ㄈㄢ":"帆凡返犯-","ㄇㄜ":"----麼","ㄧㄝ":"掖耶冶曳-","ㄩ":"迂妤宇玉-","ㄨㄤ":"汪亡惘旺-","ㄨ":"圬毋五戊-","ㄕㄠ":"捎勺少邵-","ㄑㄧㄢ":"千虔淺欠-","ㄔㄚ":"叉茶衩岔-","ㄎㄡ":"芤-口叩-","ㄊㄨ":"凸徒土兔-","ㄒㄧ":"兮席洗係-","ㄉㄚ":"搭怛打大繨","ㄋㄩ":"--女恧-","ㄗ":"孜蓻姊字子","ㄐㄧㄝ":"皆孑姐戒-","ㄐㄩㄝ":"噘孓---","ㄘㄨㄣ":"村存忖寸-","ㄒㄧㄠ":"宵淆小孝-","ㄕㄢ":"山-閃疝-","ㄔㄨㄢ":"川船舛串-","ㄍㄨㄥ":"工-廾貢-","ㄙ":"私-死四-","ㄐㄧㄣ":"巾-僅近-","ㄍㄢ":"肝-敢干-","ㄘㄞ":"猜材彩菜-","ㄔㄡ":"抽仇丑臭-","ㄍㄞ":"垓-改丐-","ㄅㄨ":"鈽鳪捕布-","ㄓㄨㄥ":"忠-冢仲-","ㄈㄥ":"丰逢諷奉-","ㄉㄢ":"丹-疸旦-","ㄓ":"卮直止志-","ㄧㄣ":"因寅引胤粌","ㄩㄣ":"暈云允孕-","ㄐㄧㄥ":"京-阱逕-","ㄏㄨ":"乎囫琥互-","ㄎㄤ":"康扛-亢-","ㄕㄣ":"申什哂脤-","ㄆㄨ":"仆匍圃鋪-","ㄖㄥ":"扔仍---","ㄗㄜ":"-則-仄伬","ㄩㄢ":"冤元遠院-","ㄋㄟ":"--餒內-","ㄌㄧㄡ":"溜流柳六-","ㄖㄨㄥ":"茸絨冗--","ㄒㄩㄥ":"凶雄-詗-","ㄈㄣ":"氛汾粉忿-","ㄑㄧㄝ":"-癿且妾-","ㄍㄡ":"勾-狗垢-","ㄏㄨㄚ":"花華-畫-","ㄆㄧ":"丕皮匹屁-","ㄕㄥ":"升繩省剩-","ㄙㄚ":"撒-灑卅-","ㄅㄧㄢ":"砭-匾汴-","ㄜ":"婀俄枙扼-","ㄊㄧㄢ":"天田忝掭-","ㄈㄨ":"伕弗府付-","ㄊㄞ":"胎跆-汰-","ㄧㄠ":"吆肴杳要-","ㄎㄨㄥ":"崆-孔控-","ㄔ":"蚩弛侈赤麶","ㄊㄨㄣ":"吞屯畽--","ㄏㄨㄢ":"歡洹緩幻-","ㄋㄧㄢ":"拈年涊廿-","ㄒㄧㄣ":"心枔伈信-","ㄍㄜ":"戈革哿各-","ㄕㄡ":"收-手狩-","ㄓㄚ":"渣札眨蚱-","ㄨㄣ":"塭文刎問-","ㄉㄡ":"兜-抖豆-","ㄈㄤ":"芳防倣放-","ㄖ":"---日-","ㄩㄝ":"曰-噦刖-","ㄇㄨ":"-呣牡木-","ㄉㄞ":"呆-歹代-","ㄇㄠ":"貓矛卯耄-","ㄕㄨㄟ":"-誰水稅-","ㄏㄨㄛ":"豁活火貨-","ㄓㄠ":"釗-沼兆-","ㄆㄧㄢ":"偏胼貵片-","ㄋㄧㄡ":"妞牛忸--","ㄑㄩㄢ":"圈全犬券-","ㄅㄧㄥ":"兵-秉併-","ㄑㄧㄡ":"丘囚糗--","ㄓㄨ":"株竹拄住-","ㄈㄚ":"發乏法琺-","ㄗㄞ":"災-宰再-","ㄊㄚ":"他-塔榻-","ㄌㄧㄥ":"-伶領另-","ㄒㄧㄢ":"先弦銑峴-","ㄔㄨㄥ":"充崇寵揰-","ㄖㄢ":"-然染--","ㄘㄜ":"---冊-","ㄉㄨㄥ":"冬-董凍-","ㄠ":"凹敖媼奧-","ㄔㄨ":"出芻杵絀-","ㄎㄢ":"刊-侃崁-","ㄐㄧㄚ":"加莢甲架-","ㄅㄠ":"包雹保豹-","ㄘㄨㄥ":"匆從-謥-","ㄅㄟ":"杯-北貝唄","ㄗㄚ":"匝砸咋--","ㄅㄢ":"班-阪姅螁","ㄏㄨㄟ":"灰回悔卉-","ㄎㄚ":"咖-卡--","ㄓㄢ":"沾-展占-","ㄑㄩ":"蛐劬取去-","ㄎㄜ":"柯咳可克嗑","ㄍㄨ":"姑鶻股固-","ㄆㄛ":"坡婆叵珀桲","ㄐㄧㄠ":"交-皎叫-","ㄐㄩ":"狙局矩具-","ㄨㄞ":"歪-崴外-","ㄧㄤ":"泱羊氧恙-","ㄋㄨ":"-奴努怒-","ㄋㄧ":"妮怩你逆-","ㄑㄧㄠ":"悄喬巧峭-","ㄗㄨㄛ":"-昨左坐-","ㄆㄧㄥ":"乒坪---","ㄏㄨㄥ":"烘弘哄訌-","ㄕㄨ":"抒孰暑戍-","ㄅㄣ":"奔-苯笨-","ㄨㄟ":"危帷洧未-","ㄇㄛ":"摸摩抹歿-","ㄓㄥ":"征-拯幀-","ㄇㄧㄣ":"-民抿--","ㄉㄧ":"低迪邸帝-","ㄩㄥ":"佣喁永用-","ㄊㄧㄥ":"汀廷挺--","ㄒㄩㄢ":"宣玄晅炫-","ㄍㄨㄚ":"瓜-寡卦-","ㄨㄚ":"挖娃瓦襪哇","ㄕㄨㄞ":"衰-甩帥-","ㄅㄞ":"擘白百敗-","ㄏㄜ":"訶禾-賀呵","ㄒㄩㄝ":"削穴雪血-","ㄔㄥ":"稱成逞秤-","ㄉㄧㄡ":"丟----","ㄆㄤ":"乓彷嗙胖-","ㄍㄣ":"根哏艮亙-","ㄏㄞ":"嗨孩海氦-","ㄒㄧㄡ":"修苬朽秀-","ㄐㄧㄢ":"尖-柬建-","ㄍㄨㄤ":"胱-廣逛-","ㄌㄧㄝ":"--咧劣-","ㄒㄧㄥ":"星刑醒杏-","ㄎㄨㄤ":"劻狂夼況-","ㄐㄧㄤ":"江-槳匠-","ㄊㄨㄥ":"通彤桶痛-","ㄒㄩ":"虛徐栩旭蓿","ㄒㄧㄤ":"香庠享向-","ㄇㄧㄥ":"-茗酩命-","ㄏㄡ":"齁喉吼后-","ㄓㄣ":"珍-診朕-","ㄍㄨㄟ":"圭-癸桂-","ㄙㄨ":"甦俗-夙-","ㄉㄨㄛ":"多奪朵剁-","ㄎㄨㄚ":"夸-垮胯-","ㄈㄟ":"飛腓斐吠-","ㄏㄠ":"蒿毫好昊-","ㄕㄨㄛ":"說--朔-","ㄓㄞ":"摘宅窄債-","ㄢ":"安玵俺岸-","ㄓㄡ":"州妯肘咒-","ㄇㄤ":"-忙莽--","ㄊㄨㄛ":"托跎妥柝-","ㄗㄠ":"遭鑿早灶-","ㄒㄩㄣ":"勛荀-汛-","ㄘ":"疵茨此次-","ㄏㄢ":"蚶函罕旱-","ㄇㄡ":"哞眸某--","ㄆㄧㄣ":"姘貧品牝-","ㄇㄧ":"咪迷米汨-","ㄈㄡ":"-紑缶--","ㄌㄠ":"撈牢老烙-","ㄎㄠ":"尻-考犒-","ㄌㄟ":"勒雷耒淚-","ㄖㄡ":"-柔楺肉-","ㄔㄣ":"琛臣墋疢-","ㄕㄜ":"奢舌捨社-","ㄙㄜ":"---嗇-","ㄞ":"哀捱矮艾-","ㄏㄥ":"亨恆---","ㄋㄧㄥ":"-苧-佞-","ㄍㄚ":"伽噶尕尬-","ㄉㄧㄢ":"甸-典店-","ㄉㄨㄟ":"堆-頧兌-","ㄇㄧㄢ":"-棉沔面-","ㄌㄥ":"-楞冷愣-","ㄅㄧㄝ":"鱉別癟彆-","ㄆㄢ":"潘槃-判-","ㄆㄠ":"拋咆跑皰-","ㄌㄨㄢ":"-孿卵亂-","ㄌㄧㄣ":"拎林凜吝-","ㄎㄥ":"吭----","ㄌㄩ":"-閭呂律-","ㄐㄩㄣ":"君--峻-","ㄍㄠ":"羔-杲告-","ㄔㄨㄟ":"炊陲---","ㄕㄨㄣ":"--吮舜-","ㄔㄠ":"抄晁炒耖-","ㄋㄚ":"-拿哪吶-","ㄎㄨㄣ":"坤-捆困-","ㄉㄨㄣ":"惇-盹鈍-","ㄊㄢ":"坍覃坦炭-","ㄏㄨㄞ":"-淮-坏-","ㄓㄨㄤ":"妝--狀-","ㄉㄨ":"督毒堵妒-","ㄇㄧㄠ":"喵苗杪妙-","ㄧㄢ":"胭妍兗彥-","ㄙㄨㄥ":"松-悚宋-","ㄋㄧㄠ":"--鳥尿-","ㄘㄣ":"嵾岑---","ㄔㄨㄤ":"窗床闖創-","ㄋㄨㄥ":"-農繷弄-","ㄎㄨㄞ":"--蒯快-","ㄨㄛ":"倭-我沃-","ㄔㄜ":"車-扯坼-","ㄓㄜ":"蜇哲者浙-","ㄊㄡ":"偷投妵透-","ㄓㄨㄚ":"抓----","ㄍㄥ":"庚-埂更-","ㄍㄤ":"肛-崗槓-","ㄅㄧㄠ":"彪-表鰾-","ㄇㄟ":"-沒每妹-","ㄕㄚ":"剎啥傻廈繌","ㄑㄧㄣ":"侵芹寢沁-","ㄆㄟ":"呸陪俖沛-","ㄏㄤ":"夯航-沆-","ㄓㄨㄛ":"拙灼---","ㄋㄢ":"囡男赧婻-","ㄏㄨㄤ":"肓凰幌滉-","ㄌㄧㄤ":"-梁兩晾-","ㄗㄡ":"陬-走奏-","ㄗㄨ":"租足俎--","ㄒㄧㄝ":"些協寫卸-","ㄅㄤ":"邦-綁棒-","ㄖㄨㄢ":"-堧軟--","ㄍㄨㄞ":"乖-拐怪-","ㄌㄞ":"-萊-睞-","ㄊㄧㄠ":"佻迢窕眺-","ㄌㄨㄣ":"掄倫碖論-","ㄕㄨㄚ":"刷-耍--","ㄐㄩㄢ":"娟-卷倦-","ㄋㄠ":"孬呶惱鬧-","ㄋㄜ":"---訥呢","ㄌㄚ":"垃剌喇辣啦","ㄇㄥ":"-虻猛孟-","ㄗㄨㄥ":"宗-傯粽-","ㄍㄨㄢ":"官-莞貫-","ㄌㄧㄢ":"-廉斂楝-","ㄊㄧㄝ":"貼-鐵餮-","ㄆㄚ":"趴爬-帕-","ㄊㄤ":"湯唐帑趟-","ㄑㄧㄤ":"羌強搶唴-","ㄙㄨㄛ":"唆-所逤嗦","ㄆㄥ":"烹朋捧碰-","ㄆㄞ":"拍俳-派-","ㄔㄞ":"拆豺-袃-","ㄔㄤ":"娼常場唱-","ㄤ":"骯昂-盎-","ㄏㄨㄣ":"婚梡-混-","ㄍㄨㄛ":"郭國果過-","ㄉㄜ":"-得--的","ㄑㄩㄥ":"芎穹---","ㄓㄨㄣ":"肫-准訰-","ㄎㄣ":"--肯掯-","ㄧㄥ":"英盈郢映-","ㄇㄣ":"-門-悶們","ㄚ":"阿嗄--啊","ㄓㄨㄟ":"隹-沝惴-","ㄑㄧㄥ":"卿情頃慶-","ㄘㄨ":"粗徂-促-","ㄊㄧ":"剔啼體剃-","ㄑㄩㄝ":"缺瘸-卻-","ㄏㄚ":"哈蛤---","ㄗㄢ":"簪咱昝暫-","ㄇㄧㄝ":"咩--滅-","ㄎㄨㄟ":"盔揆煃喟-","ㄏㄣ":"-痕很恨-","ㄗㄣ":"--怎譖-","ㄑㄧㄚ":"掐-酠恰-","ㄓㄨㄞ":"拽-跩--","ㄎㄨㄛ":"---括-","ㄕㄨㄢ":"閂--涮-","ㄔㄨㄣ":"春脣蠢--","ㄎㄨ":"哭-苦庫-","ㄉㄨㄢ":"耑-短段-","ㄌㄨㄛ":"囉螺裸洛-","ㄅㄥ":"崩甭繃迸-","ㄊㄠ":"掏逃討套-","ㄐㄩㄥ":"坰-炯--","ㄆㄣ":"噴盆呠--","ㄖㄨㄛ":"-捼-弱-","ㄋㄩㄝ":"---虐-","ㄉㄧㄝ":"爹絰---","ㄌㄤ":"啷廊朗浪-","ㄌㄡ":"瞜婁摟陋-","ㄌㄧㄚ":"--倆--","ㄘㄤ":"倉藏---","ㄆㄡ":"剖裒婄--","ㄘㄨㄛ":"搓嵯脞厝-","ㄙㄡ":"搜-叟嗽-","ㄧㄛ":"唷----","ㄛ":"喔哦---","ㄇㄞ":"-埋買麥-","ㄗㄤ":"臧-駔奘-","ㄋㄧㄤ":"-娘-釀-","ㄙㄨㄣ":"飧-筍--","ㄇㄢ":"嫚瞞屘曼-","ㄣ":"恩嗯峎摁-","ㄋㄧㄝ":"捏苶-涅-","ㄋㄨㄛ":"-挪橠諾-","ㄌㄧㄠ":"撩聊瞭料-","ㄕㄞ":"篩-繺晒-","ㄙㄤ":"桑-嗓喪-","ㄊㄜ":"---特-","ㄊㄥ":"熥疼-霯-","ㄙㄨㄟ":"睢隋髓祟-","ㄨㄥ":"翁-蓊甕-","ㄘㄨㄟ":"崔-璀脆-","ㄋㄥ":"-能---","ㄘㄠ":"操曹草肏-","ㄊㄨㄟ":"推頹腿退-","ㄇㄚ":"媽麻馬罵嗎","ㄡ":"歐齵偶慪-","ㄘㄢ":"參殘慘孱-","ㄔㄨㄞ":"揣膗-啜-","ㄌㄢ":"-嵐懶濫-","ㄓㄨㄢ":"專-轉僎-","ㄅㄧㄣ":"彬--殯-","ㄋㄧㄣ":"-您拰--","ㄌㄩㄝ":"---略-","ㄙㄠ":"搔-嫂埽-","ㄕㄨㄤ":"霜-爽灀-","ㄔㄢ":"攙嬋產懺-","ㄆㄧㄠ":"剽嫖瞟票-","ㄍㄨㄣ":"--袞棍-","ㄌㄨ":"謢盧鹵陸-","ㄗㄨㄟ":"厜-嘴最-","ㄎㄞ":"揩-凱愒-","ㄗㄨㄣ":"尊-撙捘-","ㄘㄥ":"噌曾-蹭-","ㄙㄣ":"森----","ㄎㄨㄢ":"寬-款--","ㄘㄡ":"---湊-","ㄊㄨㄢ":"湍團-彖-","ㄙㄨㄢ":"痠-匴算-","ㄉㄥ":"登-等凳-","ㄍㄟ":"--給--","ㄖㄨㄣ":"---閏-","ㄌㄨㄥ":"-隆壟哢-","ㄏㄟ":"黑----","ㄙㄞ":"塞--賽-","ㄖㄜ":"--惹熱-","ㄋㄨㄢ":"-奻暖--","ㄖㄨㄟ":"-婑蕊瑞-","ㄉㄤ":"當-擋儅-","ㄑㄩㄣ":"囷群---","ㄗㄟ":"-賊---","ㄙㄥ":"僧----","ㄋㄣ":"---嫩-","ㄆㄧㄝ":"撇-苤嫳-","ㄔㄨㄛ":"戳--綽-","ㄗㄥ":"增--贈-","ㄖㄠ":"-嬈擾繞-","ㄘㄨㄢ":"汆巑-篡-","ㄋㄡ":"-羺-耨-","ㄘㄚ":"擦-礤囃-","ㄇㄧㄡ":"---謬-","ㄖㄤ":"-瓤嚷讓-","ㄗㄨㄢ":"鑽-纂攥-","ㄋㄤ":"囔囊曩--","ㄉㄣ":"---扥-","ㄈㄛ":"-坲---","ㄖㄨㄚ":"-挼---","ㄔㄨㄚ":"欻----","ㄈㄧㄠ":"---覅-","ㄟ":"-誒---","ㄏㄇ":"----噷","ㄥ":"鞥----","ㄝ":"誒----"};
+var TONE={Space:1,Digit6:2,Digit3:3,Digit4:4,Digit7:5};
+var TMARK=['','ˊ','ˇ','ˋ','˙'],TNAME=['','第一聲','第二聲','第三聲','第四聲','輕聲'];
+var $=function(i){return document.getElementById(i)};
+var t=$('t'),zy=$('zy'),tn=$('tn'),voices=[],voice=null,buf='',pick=false;
+function load(){
+  voices=speechSynthesis.getVoices().filter(function(v){return /zh/i.test(v.lang)});
+  var s=$('v');s.innerHTML='';
+  voices.forEach(function(v,i){var o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';s.appendChild(o)});
+  var pref=/HsiaoChen|HsiaoYu|Mei-?Jia|Meijia|Ting|Google/i;
+  var best=voices.findIndex(function(v){return /TW|Hant/i.test(v.lang)&&pref.test(v.name)});
+  if(best<0)best=voices.findIndex(function(v){return /TW|Hant/i.test(v.lang)});
+  if(best<0)best=0;
+  if(voices.length){s.value=best;voice=voices[best]}
+}
+if('speechSynthesis' in window){load();speechSynthesis.onvoiceschanged=load}
+$('v').onchange=function(){voice=voices[this.value]};
+/* 念出聲音。keep=true 表示排在目前的聲音後面（不打斷）；否則先停掉舊的再念，避免聲音疊在一起 */
+function say(x,keep,mul){
+  if(!x||!('speechSynthesis' in window))return;
+  var u=new SpeechSynthesisUtterance(x);
+  u.lang='zh-TW';if(voice)u.voice=voice;
+  u.pitch=+$('p').value;u.rate=(+$('r').value)*(mul||1);
+  window._u=window._u||[];window._u.push(u);if(window._u.length>20)window._u.shift();
+  if(keep){speechSynthesis.speak(u);return}
+  speechSynthesis.cancel();
+  setTimeout(function(){speechSynthesis.speak(u)},40);
+}
+/* 把「注音 + 聲調」換成一個一定唸得出該聲調的字 */
+function sylChar(base,tone){
+  var r=SYL[base];if(!r)return null;
+  var a=Array.from(r),c=a[tone-1];
+  if(c&&c!=='-')return c;
+  for(var i=0;i<a.length;i++)if(a[i]!=='-')return a[i];
+  return null;
+}
+function speakSyllable(base,tone){
+  var c=sylChar(base,tone);
+  var mark=tone===5?'˙'+base:base+TMARK[tone-1];
+  tn.textContent=mark+'　'+TNAME[tone];
+  if(c){say(c,false,.8);return}
+  /* 查不到這個音節：把每個注音符號依序念一遍 */
+  say(base.split('').map(function(z){return NAME[z]||''}).join('，'));
+}
+function lastSentence(){
+  var m=t.value.match(/[^。！？!?\n]+[。！？!?]?/g);
+  if(!m)return '';
+  return m[m.length-1].trim();
+}
+function save(){try{localStorage.setItem('zy-text-aac',t.value)}catch(e){}}
+try{t.value=localStorage.getItem('zy-text-aac')||''}catch(e){}
+
+t.addEventListener('keydown',function(e){
+  var comp=e.isComposing||e.key==='Process'||e.keyCode===229;
+  if(!comp){
+    buf='';pick=false;tn.textContent='　';
+    if(e.key==='Enter'&&!e.shiftKey&&$('e').checked){var s=lastSentence();if(s)say(s)}
+    return;
+  }
+  if(e.ctrlKey||e.metaKey||e.altKey)return;
+  var c=e.code;
+  if(c==='Backspace'){buf=buf.slice(0,-1);return}
+  if(c==='Escape'||c==='Enter'||c==='NumpadEnter'){buf='';pick=false;return}
+  if(c==='ArrowDown'||c==='ArrowUp'||c==='PageDown'||c==='PageUp'){pick=true;return}
+  /* 聲調鍵：有打注音時，念出「整個音」（含正確聲調） */
+  if(TONE[c]&&buf){
+    var base=buf;buf='';
+    if($('n').checked)speakSyllable(base,TONE[c]);
+    else tn.textContent=base+(TONE[c]===5?'':TMARK[TONE[c]-1])+'　'+TNAME[TONE[c]];
+    return;
+  }
+  if(c==='Space'){pick=true;return}        /* 沒有注音時按空白＝打開候選字 */
+  var isDigit=/^Digit/.test(c);
+  if(pick&&isDigit)return;                 /* 候選字選單開著時，數字是選字，不是注音 */
+  var z=MAP[c];
+  if(z){
+    pick=false;buf+=z;tn.textContent='　';
+    if($('k').checked){var nm=$('d').checked?z:NAME[z];if($('d').checked){say(z,false,.7)}else say(nm,false,.7)}
+  }
+});
+t.addEventListener('compositionupdate',function(e){zy.textContent=e.data||'　'});
+/* 選好字（送出）：把這個字／詞念一次。排在聲調聲音後面，不會把它切掉 */
+t.addEventListener('compositionend',function(e){
+  zy.textContent='　';buf='';pick=false;
+  var d=e.data||'';
+  if(!d)return;
+  save();
+  if(/[。！？!?]$/.test(d)&&$('e').checked){setTimeout(function(){say(lastSentence())},80);return}
+  if($('c').checked&&/[^\x00-\x7f]/.test(d))say(d,speechSynthesis.speaking);
+});
+t.addEventListener('input',function(e){
+  save();
+  var d=e.data||'';
+  if(/^[a-zA-Z]$/.test(d))$('hint').style.display='block';
+  else if(/[ㄅ-ㄩ]|[^\x00-\x7f]/.test(d))$('hint').style.display='none';
+  /* 不是輸入法、直接打出來的句尾符號 */
+  if(!e.isComposing&&e.inputType==='insertText'&&/[。！？!?]$/.test(d)&&$('e').checked){setTimeout(function(){say(lastSentence())},60)}
+});
+$('bs').onclick=function(){say(lastSentence());t.focus()};
+$('ba').onclick=function(){
+  speechSynthesis.cancel();
+  var parts=t.value.split(/(?<=[。！？!?\n])/).map(function(x){return x.trim()}).filter(Boolean);
+  setTimeout(function(){parts.forEach(function(p){say(p,true)})},60);t.focus();
+};
+$('bx').onclick=function(){speechSynthesis.cancel();t.focus()};
+$('bc').onclick=function(){if(!t.value||confirm('要清除全部文字嗎？')){t.value='';save();speechSynthesis.cancel();t.focus()}};
+$('bt').onclick=function(){say('你好，我是小女孩的聲音，我可以幫你念出來。')};
+document.addEventListener('keydown',function(e){if(e.ctrlKey&&e.key==='Enter'){e.preventDefault();$('ba').click()}});
+
+/* ---- 下載 Word 檔 ---- */
+function buildDocx(text){
+  var enc=new TextEncoder();
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+  var lines=text.replace(/\r\n?/g,'\n').split('\n');
+  var body=lines.map(function(l){
+    return l?'<w:p><w:r><w:t xml:space="preserve">'+esc(l)+'</w:t></w:r></w:p>':'<w:p/>';
+  }).join('');
+  var NS='xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"';
+  var H='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+  var files=[
+    ['[Content_Types].xml',H+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>'],
+    ['_rels/.rels',H+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'],
+    ['word/_rels/document.xml.rels',H+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>'],
+    ['word/styles.xml',H+'<w:styles '+NS+'><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:eastAsia="Microsoft JhengHei" w:cs="Calibri"/><w:sz w:val="32"/><w:szCs w:val="32"/><w:lang w:val="en-US" w:eastAsia="zh-TW"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="360" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/></w:style></w:styles>'],
+    ['word/document.xml',H+'<w:document '+NS+'><w:body>'+body+'<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr></w:body></w:document>']
+  ];
+  var crcT=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=c&1?(0xEDB88320^(c>>>1)):(c>>>1);crcT[n]=c>>>0}
+  function crc(b){var c=0xFFFFFFFF;for(var i=0;i<b.length;i++)c=crcT[(c^b[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0}
+  var parts=[],cd=[],off=0;
+  function u16(v){return[v&255,(v>>>8)&255]}
+  function u32(v){return[v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255]}
+  files.forEach(function(f){
+    var name=enc.encode(f[0]),data=enc.encode(f[1]),cr=crc(data);
+    var lh=[].concat(u32(0x04034b50),u16(20),u16(0x0800),u16(0),u16(0),u16(0x21),u32(cr),u32(data.length),u32(data.length),u16(name.length),u16(0));
+    parts.push(new Uint8Array(lh),name,data);
+    var ch=[].concat(u32(0x02014b50),u16(20),u16(20),u16(0x0800),u16(0),u16(0),u16(0x21),u32(cr),u32(data.length),u32(data.length),u16(name.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(off));
+    cd.push(new Uint8Array(ch),name);
+    off+=lh.length+name.length+data.length;
+  });
+  var cdSize=0;cd.forEach(function(p){cdSize+=p.length});
+  var end=[].concat(u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),u32(cdSize),u32(off),u16(0));
+  return new Blob(parts.concat(cd,[new Uint8Array(end)]),{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+}
+
+$('bw').onclick=function(){
+  if(!t.value.trim()){alert('還沒有打字喔，先打一些字再下載吧 🌸');t.focus();return}
+  var d=new Date(),p=function(n){return(n<10?'0':'')+n};
+  var name='擴大性溝通打字_'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'_'+p(d.getHours())+p(d.getMinutes())+'.docx';
+  var url=URL.createObjectURL(buildDocx(t.value));
+  var a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(url);a.remove()},1500);
+};
+})();
+</script>
+</body>
+</html>
